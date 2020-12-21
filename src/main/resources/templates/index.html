@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>ユーザーリスト</h1>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>名前</th>
+			<th>メールアドレス</th>
+		</tr>
+		<tr th:each="u : ${user}">
+			<td th:text="${u.id}"></td>
+			<td th:text="${u.name}"></td>
+			<td th:text="${u.email}"></td>
+		</tr>
+	</table>
+	<h1>コメントリスト</h1>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>ユーザID</th>
+			<th>コメント</th>
+		</tr>
+		<tr th:each="c : ${comment}">
+			<td th:text="${c.id}"></td>
+			<td th:text="${c.user.id}"></td>
+			<td th:text="${c.text}"></td>
+		</tr>
+	</table>
+
+	<form method="post" action="/user" th:object="${formModel}">
+		<h1>ユーザー登録</h1>
+		<label>名前</label><input type="text" name="name"> <label>メール</label><input
+			type="text" name="email"> <input type="submit" value="登録">
+	</form>
+	<form method="post" action="/comment" th:object="${formModel}">
+		<h1>コメント登録</h1>
+		<label>コメント</label><input type="text" name="text"> <input
+			type="submit" value="登録">
+	</form>
+
+
+</body>
+</html>
